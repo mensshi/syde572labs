@@ -31,21 +31,21 @@ function plotGrid( classes, cases )
     
     %% Case 1 - NN (uncomment)
     
-%     figure
-%     plot( A.X1, A.X2, 'b.' )
-%     hold on
-%     plot( B.X1, B.X2, 'r.' )
-%     contour( C1.X1, C1.X2, C1.Grid.NN, 'k' )
-%     
-%     plot( A.stdContour.X, A.stdContour.Y, 'b', 'MarkerSize', 3 )
-%     plot( B.stdContour.X, B.stdContour.Y, 'r', 'MarkerSize', 3 )
-% 
-%     title( 'A B (NN)' );
-%     xlabel( 'x1' );
-%     ylabel( 'x2' );
-%     legend( 'A', 'B', 'NN' );
-%     axis equal
-%     pbaspect([1 1 1])
+    figure
+    plot( A.X1, A.X2, 'b.' )
+    hold on
+    plot( B.X1, B.X2, 'r.' )
+    contour( C1.X1, C1.X2, C1.Grid.NN, 'k' )
+    
+    plot( A.stdContour.X, A.stdContour.Y, 'b', 'MarkerSize', 3 )
+    plot( B.stdContour.X, B.stdContour.Y, 'r', 'MarkerSize', 3 )
+
+    title( 'A B (NN)' );
+    xlabel( 'x1' );
+    ylabel( 'x2' );
+    legend( 'A', 'B', 'NN' );
+    axis equal
+    pbaspect([1 1 1])
     
     %% Case 1 - kNN (uncomment)
     
@@ -90,24 +90,24 @@ function plotGrid( classes, cases )
     
     %% Case 2 - NN (uncomment)
     
-%     figure
-%     plot( C.X1, C.X2, 'b.' )
-%     hold on
-%     plot( D.X1, D.X2, 'r.' )
-%     plot( E.X1, E.X2, 'g.' )
-%     
-%     contour( C2.X1, C2.X2, C2.Grid.NN, 'k' )
-%     
-%     plot( C.stdContour.X, C.stdContour.Y, 'b', 'MarkerSize', 3 )
-%     plot( D.stdContour.X, D.stdContour.Y, 'r', 'MarkerSize', 3 )
-%     plot( E.stdContour.X, E.stdContour.Y, 'g', 'MarkerSize', 3 )
-% 
-%     title( 'C D E (NN)' );
-%     xlabel( 'x1' );
-%     ylabel( 'x2' );
-%     legend( 'C', 'D', 'E', 'NN' );
-%     axis equal
-%     pbaspect([1 1 1])
+    figure
+    plot( C.X1, C.X2, 'b.' )
+    hold on
+    plot( D.X1, D.X2, 'r.' )
+    plot( E.X1, E.X2, 'g.' )
+    
+    contour( C2.X1, C2.X2, C2.Grid.NN, 'k' )
+    
+    plot( C.stdContour.X, C.stdContour.Y, 'b', 'MarkerSize', 3 )
+    plot( D.stdContour.X, D.stdContour.Y, 'r', 'MarkerSize', 3 )
+    plot( E.stdContour.X, E.stdContour.Y, 'g', 'MarkerSize', 3 )
+
+    title( 'C D E (NN)' );
+    xlabel( 'x1' );
+    ylabel( 'x2' );
+    legend( 'C', 'D', 'E', 'NN' );
+    axis equal
+    pbaspect([1 1 1])
     
     %% Case 2 - kNN (uncomment)
     

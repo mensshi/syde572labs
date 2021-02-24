@@ -13,6 +13,7 @@ function [ grid, probability ] = gridClass( Case )
     for i = 1:length( Case.XAxis )
         for j = 1:length( Case.YAxis )
             
+            % coordinates for every point in a case
             x = Case.XAxis(i);
             y = Case.YAxis(j);
             
