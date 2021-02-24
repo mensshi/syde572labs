@@ -10,6 +10,7 @@ function Error = validate( Case )
     Error.kNN = 0;
     
     classes_in_case = Case.classes_in_case;
+    probability = Case.probability;
     
     for class_num = 1:length( classes_in_case )
         samples = classes_in_case(class_num).samples;
@@ -29,7 +30,7 @@ function Error = validate( Case )
             end
             
             % MAP
-            if MAP( x, y, classes_in_case ) ~= class_num
+            if MAP( x, y, classes_in_case, probability ) ~= class_num
                 Error.MAP = Error.MAP + 1;
             end
             

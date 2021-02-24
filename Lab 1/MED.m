@@ -33,19 +33,19 @@ function est = MED( x, y, classes_in_case)
 
         % Covers cases with 0 diff, but closer to third
         if      diffCD == 0 && distE < distC
-            est = 5;
-        elseif  diffDE == 0 && distC < distD
             est = 3;
+        elseif  diffDE == 0 && distC < distD
+            est = 1;
         elseif  diffEC == 0 && distD < distE
-            est = 4;
+            est = 2;
 
         % Finds min
         elseif  distC < distD && distC < distE
-            est = 3;
+            est = 1;
         elseif  distD < distC && distD < distE
-            est = 4;
+            est = 2;
         elseif  distE < distC && distE < distD
-            est = 5;
+            est = 3;
 
         % Else est = 0
         end

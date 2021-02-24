@@ -15,9 +15,9 @@ function plotGrid( classes, cases )
     plot( A.X1, A.X2, 'b.' )
     hold on
     plot( B.X1, B.X2, 'r.' )
-    contour( C1.X1, C1.X2, C1.Grid.MED, 'k' )
-    contour( C1.X1, C1.X2, C1.Grid.MICD, 'k:' )
-%     contour( C1.X1, C1.X2, C1.Grid.MAP, 1, 'm--' )
+    contour( C1.X1, C1.X2, C1.Grid.MED, 1, 'k' )
+    contour( C1.X1, C1.X2, C1.Grid.MICD, 1, 'k:' )
+    contour( C1.X1, C1.X2, C1.Grid.MAP, 1, 'm--' )
     
     plot( A.stdContour.X, A.stdContour.Y, 'b', 'MarkerSize', 3 )
     plot( B.stdContour.X, B.stdContour.Y, 'r', 'MarkerSize', 3 )
@@ -25,7 +25,7 @@ function plotGrid( classes, cases )
     title( 'A B (MED, MICD, MAP)' );
     xlabel( 'x1' );
     ylabel( 'x2' );
-    legend( 'A', 'B', 'MED', 'MICD' );
+    legend( 'A', 'B', 'MED', 'MICD', 'MAP' );
     axis equal
     pbaspect([1 1 1])
     
@@ -73,9 +73,9 @@ function plotGrid( classes, cases )
     plot( D.X1, D.X2, 'r.' )
     plot( E.X1, E.X2, 'g.' )
     
-    contour( C2.X1, C2.X2, C2.Grid.MED, 'k' )
-    contour( C2.X1, C2.X2, C2.Grid.MICD, 'm--' )
-%     contour( C2.X1, C2.X2, C2.Grid.MAP, 2, 'm:' )
+    contour( C2.X1, C2.X2, C2.Grid.MED, 2, 'k' )
+    contour( C2.X1, C2.X2, C2.Grid.MICD, 2, 'k:' )
+    contour( C2.X1, C2.X2, C2.Grid.MAP, 2, 'm-' )
     
     plot( C.stdContour.X, C.stdContour.Y, 'b', 'MarkerSize', 3 )
     plot( D.stdContour.X, D.stdContour.Y, 'r', 'MarkerSize', 3 )
@@ -84,7 +84,7 @@ function plotGrid( classes, cases )
     title( 'C D E (MED, MICD, MAP)' );
     xlabel( 'x1' );
     ylabel( 'x2' );
-    legend( 'C', 'D', 'E', 'MED', 'MICD' );
+    legend( 'C', 'D', 'E', 'MED', 'MICD', 'MAP' );
     axis equal
     pbaspect([1 1 1])
     

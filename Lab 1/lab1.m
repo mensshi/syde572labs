@@ -16,15 +16,29 @@ cases = plotOriginal( classes );
 cases(1).classes_in_case = [ classes(1), classes(2) ];
 cases(2).classes_in_case = [ classes(3), classes(4), classes(5) ];
 
-% runs grid through multiple classifiers
-cases(1).Grid = gridClass( cases(1) );
-cases(2).Grid = gridClass( cases(2) );
+for i = 1:length( cases )
+    
+    % sets total of samples
+    cases(i).total = getTotal( cases(i).classes_in_case );
+    
+    % runs grid through multiple classifiers
+    [ cases(i).Grid, cases(i).probability ] = gridClass( cases(i) );
+    
+    % classifies samples
+    cases(i).Error = validate( cases(i) );
+    
+    % calculates error
+    
+end
 
 % plots classifiers and decision boundaries
 plotGrid( classes, cases );
 
-% classifies samples
-cases(1).Error = validate( cases(1) );
-cases(2).Error = validate( cases(2) );
 
-% calculates error
+%% Helper functions
+function total = getTotal( classes_in_case )
+    total = 0;
+    for i = 1:length( classes_in_case )
+       total = total + classes_in_case(i).N;
+    end
+end
