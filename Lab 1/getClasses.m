@@ -32,11 +32,12 @@ function classes = getClasses()
         % this is because for A and B, eig(sigma) returns V = [0 1; 1 0],
         % which rotates all points by 90 deg
         if i <= 2
-            classes(i).D = classes(i).sigma;
-            classes(i).V = [1 0; 0 1];
+            classes(i).D = classes(i).sigma; %eigenval
+            classes(i).V = [1 0; 0 1]; %eigenvec
         else
             [classes(i).V, classes(i).D] = eig(classes(i).sigma);
         end
+        %L = lamba, W = whitening/transform
         [classes(i).L, classes(i).W, classes(i).samples] = genSampleData( classes(i) );
         classes(i).X1 = classes(i).samples(:, 1);
         classes(i).X2 = classes(i).samples(:, 2);
