@@ -1,16 +1,24 @@
 % runs through samples or tests and checks if properly classified
 % counter for errors
 
-function Error = validate( Case )
+function Test = validate( Case )
 
-    Error.MED = 0;
-    Error.MICD = 0;
-    Error.MAP = 0;
-    Error.NN = 0;
-    Error.kNN = 0;
-    
     classes_in_case = Case.classes_in_case;
     probability = Case.probability;
+
+    Test.MED.error = 0;
+    Test.MICD.error = 0;
+    Test.MAP.error = 0;
+    Test.NN.error = 0;
+    Test.kNN.error = 0;
+    
+    % confusion matrix ( rows are actual values; cols are estimates )
+    % has extra column for 0 (decision boundary)
+    Test.MED.confusion =    zeros( length( classes_in_case ), length( classes_in_case ) + 1 );
+    Test.MICD.confusion =   zeros( length( classes_in_case ), length( classes_in_case ) + 1 );
+    Test.MAP.confusion =    zeros( length( classes_in_case ), length( classes_in_case ) + 1 );
+    Test.NN.confusion =     zeros( length( classes_in_case ), length( classes_in_case ) + 1 );
+    Test.kNN.confusion =    zeros( length( classes_in_case ), length( classes_in_case ) + 1 );
     
     for class_num = 1:length( classes_in_case )
         samples = classes_in_case(class_num).samples;
@@ -19,29 +27,39 @@ function Error = validate( Case )
             x = samples(i, 1);
             y = samples(i, 2);
 
-            % MED          
-            if MED( x, y, classes_in_case ) ~= class_num
-                Error.MED = Error.MED + 1;
+            % MED     
+            est = MED( x, y, classes_in_case );
+            Test.MED.confusion( class_num, est + 1 ) = Test.MED.confusion( class_num, est + 1 ) + 1;
+            if est ~= class_num
+                Test.MED.error = Test.MED.error + 1;
             end
 
             % MICD
-            if MICD( x, y, classes_in_case ) ~= class_num
-                Error.MICD = Error.MICD + 1;
+            est = MICD( x, y, classes_in_case );
+            Test.MICD.confusion( class_num, est + 1 ) = Test.MICD.confusion( class_num, est + 1 ) + 1;
+            if est ~= class_num
+                Test.MICD.error = Test.MICD.error + 1;
             end
             
             % MAP
-            if MAP( x, y, classes_in_case, probability ) ~= class_num
-                Error.MAP = Error.MAP + 1;
+            est = MAP( x, y, classes_in_case, probability );
+            Test.MAP.confusion( class_num, est + 1 ) = Test.MAP.confusion( class_num, est + 1 ) + 1;
+            if est ~= class_num
+                Test.MAP.error = Test.MAP.error + 1;
             end
             
             % NN
-            if NN( x, y, classes_in_case ) ~= class_num
-                Error.NN = Error.NN + 1;
+            est = NN( x, y, classes_in_case );
+            Test.NN.confusion( class_num, est + 1 ) = Test.NN.confusion( class_num, est + 1 ) + 1;
+            if est ~= class_num
+                Test.NN.error = Test.NN.error + 1;
             end
             
             % kNN
-            if kNN( x, y, classes_in_case ) ~= class_num
-                Error.kNN = Error.kNN + 1;
+            est = kNN( x, y, classes_in_case );
+            Test.kNN.confusion( class_num, est + 1 ) = Test.kNN.confusion( class_num, est + 1 ) + 1;
+            if est ~= class_num
+                Test.kNN.error = Test.kNN.error + 1;
             end
         end
     end

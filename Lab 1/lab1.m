@@ -24,11 +24,8 @@ for i = 1:length( cases )
     % runs grid through multiple classifiers
     [ cases(i).Grid, cases(i).probability ] = gridClass( cases(i) );
     
-    % classifies samples
-    cases(i).Error = validate( cases(i) );
-    
-    % calculates error
-    
+    % error analysis
+    cases(i).Test = validate( cases(i) );
 end
 
 % plots classifiers and decision boundaries
