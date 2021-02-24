@@ -1,3 +1,5 @@
+% plots the original data and unit standard deviation contour for Q2
+
 function cases = plotOriginal( classes )
 
     A = classes(1);

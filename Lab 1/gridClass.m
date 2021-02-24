@@ -1,67 +1,31 @@
-function cases = gridClass( classes, cases )
-
-	A = classes(1);
-    B = classes(2);
-    C = classes(3);
-    D = classes(4);
-    E = classes(5);
-
-    %% Set up for each case
-    for i = 1:2             
-        cases(i).Grid.MED =  zeros(length( cases(i).XAxis ),length( cases(i).YAxis ));
-        cases(i).Grid.MICD = zeros(length( cases(i).XAxis ),length( cases(i).YAxis ));
-        cases(i).Grid.MAP =  zeros(length( cases(i).XAxis ),length( cases(i).YAxis ));
-        cases(i).Grid.NN =   zeros(length( cases(i).XAxis ),length( cases(i).YAxis ));
-        cases(i).Grid.kNN =  zeros(length( cases(i).XAxis ),length( cases(i).YAxis ));
-    end
+function grid = gridClass( Case )
+        
+    grid.MED =  zeros(length( Case.XAxis ),length( Case.YAxis ));
+    grid.MICD = zeros(length( Case.XAxis ),length( Case.YAxis ));
+    grid.MAP =  zeros(length( Case.XAxis ),length( Case.YAxis ));
+    grid.NN =   zeros(length( Case.XAxis ),length( Case.YAxis ));
+    grid.kNN =  zeros(length( Case.XAxis ),length( Case.YAxis ));
      
-    %% Case 1
-    
-    for i = 1:length( cases(1).XAxis )
-        for j = 1:length( cases(1).YAxis )
+    for i = 1:length( Case.XAxis )
+        for j = 1:length( Case.YAxis )
             
-            x = cases(1).XAxis(i);
-            y = cases(1).YAxis(j);
+            x = Case.XAxis(i);
+            y = Case.YAxis(j);
             
             % MED
-            cases(1).Grid.MED(j,i) = MED1( x, y, A, B );
+            grid.MED(j,i) = MED( x, y, Case.classes_in_case );
             
             % MICD
-            cases(1).Grid.MICD(j,i) = MICD1( x, y, A, B );
+            grid.MICD(j,i) = MICD( x, y, Case.classes_in_case );
             
             % MAP
-            cases(1).Grid.MAP(j,i) = MAP1( x, y, A, B );
+            grid.MAP(j,i) = MAP( x, y, Case.classes_in_case );
             
             % NN
-            cases(1).Grid.NN(j,i) = NN1( x, y, A, B );
+            grid.NN(j,i) = NN( x, y, Case.classes_in_case );
             
             % kNN
-            cases(1).Grid.kNN(j,i) = kNN1( x, y, A, B );
-            
-        end
-    end
-    
-    %% Case 2
-    for i = 1:length( cases(2).XAxis )
-        for j = 1:length( cases(2).YAxis )
-            
-            x = cases(2).XAxis(i);
-            y = cases(2).YAxis(j);
-            
-            % MED
-            cases(2).Grid.MED(j,i) = MED2( x, y, C, D, E );
-            
-            % MICD         
-            cases(2).Grid.MICD(j,i) = MICD2( x, y, C, D, E );
-
-            % MAP
-            cases(2).Grid.MAP(j,i) = MAP2( x, y, C, D, E );
-            
-            % NN
-            cases(2).Grid.NN(j,i) = NN2( x, y, C, D, E );
-            
-            % kNN
-            cases(2).Grid.kNN(j,i) = kNN2( x, y, C, D, E );
+            grid.kNN(j,i) = kNN( x, y, Case.classes_in_case );
             
         end
     end

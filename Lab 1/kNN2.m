@@ -1,3 +1,0 @@
-function est = kNN2( x, y, C, D, E)
-    est = 0;
-end
