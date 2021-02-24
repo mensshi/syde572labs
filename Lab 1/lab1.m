@@ -11,16 +11,16 @@ rng('default')
 % classes is an array
 classes = getClasses();
 
-% plots original classes; gets case data
+% plots original classes; gets axis data for grid classification
 cases = plotOriginal( classes );
 
-% runs dist calculatiosn for entire grid
+% classifies entire grid
 cases = gridClass( classes, cases );
 
 % plots classifiers and decision boundaries
 plotGrid( classes, cases );
 
 % classifies samples
-cases = classify( classes, cases );
+cases = validate( classes, cases );
 
 % calculates error

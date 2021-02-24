@@ -1,4 +1,4 @@
-function cases = classify( classes, cases )
+function cases = validate( classes, cases )
 
 	A = classes(1);
     B = classes(2);
@@ -7,7 +7,7 @@ function cases = classify( classes, cases )
     E = classes(5);
 
     %% Set up for each class
-    for i = 1:2               
+    for i = 1:2
         cases(i).Error.MED = 0;
         cases(i).Error.MICD = 0;
         cases(i).Error.MAP = 0;
@@ -35,10 +35,19 @@ function cases = classify( classes, cases )
             end
             
             % MAP
+            if MAP1( x, y, A, B ) ~= class_num
+                cases(1).Error.MAP = cases(1).Error.MAP + 1;
+            end
             
             % NN
+            if NN1( x, y, A, B ) ~= class_num
+                cases(1).Error.NN = cases(1).Error.NN + 1;
+            end
             
             % kNN
+            if kNN1( x, y, A, B ) ~= class_num
+                cases(1).Error.kNN = cases(1).Error.kNN + 1;
+            end
         end
         
     end
@@ -62,10 +71,19 @@ function cases = classify( classes, cases )
             end
             
             % MAP
+            if MAP2( x, y, C, D, E ) ~= class_num
+                cases(2).Error.MAP = cases(2).Error.MAP + 1;
+            end
             
             % NN
+            if NN2( x, y, C, D, E ) ~= class_num
+                cases(2).Error.NN = cases(2).Error.NN + 1;
+            end
             
             % kNN
+            if kNN2( x, y, C, D, E ) ~= class_num
+                cases(2).Error.kNN = cases(2).Error.kNN + 1;
+            end
             
         end
         

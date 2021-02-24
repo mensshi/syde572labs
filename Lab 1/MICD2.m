@@ -9,11 +9,11 @@ function est = MICD2( x, y, C, D, E )
     diffEC = distE - distC;
 
     % Covers cases with 0 diff, but closer to third
-    if      diffCD == 0 && diffE < diffC
+    if      diffCD == 0 && distE < distC
         est = 5;
-    elseif  diffDE == 0 && diffC < diffD
+    elseif  diffDE == 0 && distC < distD
         est = 3;
-    elseif  diffEC == 0 && diffD < diffE
+    elseif  diffEC == 0 && distD < distE
         est = 4;
 
     % Finds min

@@ -20,6 +20,7 @@ function cases = plotOriginal( classes )
     ylabel( 'x2' );
     legend( 'A', 'B' );
     axis equal
+    pbaspect([1 1 1])
     
     axes1 = gca;
 
@@ -39,6 +40,7 @@ function cases = plotOriginal( classes )
     ylabel( 'x2' );
     legend( 'C', 'D', 'E' );
     axis equal
+    pbaspect([1 1 1])
     
     axes2 = gca;
     

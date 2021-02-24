@@ -24,16 +24,19 @@ function cases = gridClass( classes, cases )
             y = cases(1).YAxis(j);
             
             % MED
-            cases(1).Grid.MED(i,j) = MED1( x, y, A, B );
+            cases(1).Grid.MED(j,i) = MED1( x, y, A, B );
             
             % MICD
-            cases(1).Grid.MICD(i,j) = MICD1( x, y, A, B );
+            cases(1).Grid.MICD(j,i) = MICD1( x, y, A, B );
             
             % MAP
+            cases(1).Grid.MAP(j,i) = MAP1( x, y, A, B );
             
             % NN
+            cases(1).Grid.NN(j,i) = NN1( x, y, A, B );
             
             % kNN
+            cases(1).Grid.kNN(j,i) = kNN1( x, y, A, B );
             
         end
     end
@@ -46,16 +49,19 @@ function cases = gridClass( classes, cases )
             y = cases(2).YAxis(j);
             
             % MED
-            cases(2).Grid.MED(i,j) = MED2( x, y, C, D, E );
+            cases(2).Grid.MED(j,i) = MED2( x, y, C, D, E );
             
             % MICD         
-            cases(2).Grid.MICD(i,j) = MICD2( x, y, C, D, E );
+            cases(2).Grid.MICD(j,i) = MICD2( x, y, C, D, E );
 
             % MAP
+            cases(2).Grid.MAP(j,i) = MAP2( x, y, C, D, E );
             
             % NN
+            cases(2).Grid.NN(j,i) = NN2( x, y, C, D, E );
             
             % kNN
+            cases(2).Grid.kNN(j,i) = kNN2( x, y, C, D, E );
             
         end
     end
