@@ -24,9 +24,7 @@ function [ grid, probability ] = gridClass( Case )
             grid.MICD(j,i) = MICD( x, y, classes_in_case );
             
             % MAP
-            for k = 1:length( classes_in_case )
-                probability(k) = classes_in_case(k).N / Case.total;
-            end
+            probability = getProbability( classes_in_case, Case.total );           
             grid.MAP(j,i) = MAP( x, y, classes_in_case, probability );
             
             % NN
@@ -36,5 +34,24 @@ function [ grid, probability ] = gridClass( Case )
             grid.kNN(j,i) = kNN( x, y, classes_in_case );
             
         end
+    end
+end
+
+%% Helper Function
+function probability = getProbability( classes_in_case, total )
+    
+    %% Case 1
+    if length( classes_in_case ) == 2
+        probability.A = classes_in_case(1).N / total;
+        probability.B = classes_in_case(2).N / total;
+        
+        probability.threshold = log( probability.A / probability.B );
+        
+    %% Case 2
+    else
+        probability.C = classes_in_case(1).N / total;
+        probability.D = classes_in_case(2).N / total;
+        probability.E = classes_in_case(3).N / total;
+        
     end
 end

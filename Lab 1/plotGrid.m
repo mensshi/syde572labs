@@ -75,7 +75,7 @@ function plotGrid( classes, cases )
     
     contour( C2.X1, C2.X2, C2.Grid.MED, 2, 'k' )
     contour( C2.X1, C2.X2, C2.Grid.MICD, 2, 'k:' )
-    contour( C2.X1, C2.X2, C2.Grid.MAP, 2, 'm-' )
+    contour( C2.X1, C2.X2, C2.Grid.MAP, 2, 'm--' )
     
     plot( C.stdContour.X, C.stdContour.Y, 'b', 'MarkerSize', 3 )
     plot( D.stdContour.X, D.stdContour.Y, 'r', 'MarkerSize', 3 )
