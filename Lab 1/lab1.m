@@ -22,7 +22,7 @@ for i = 1:length( cases )
     cases(i).total = getTotal( cases(i).classes_in_case );
     
     % runs grid through multiple classifiers
-    [ cases(i).Grid, cases(i).probability ] = gridClass( cases(i) );
+    [ cases(i).Grid, cases(i).probability, cases(i).pdf ] = gridClass( cases(i) );
     
     % error analysis
     cases(i).Test = validate( cases(i) );

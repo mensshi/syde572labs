@@ -1,15 +1,22 @@
 % MAP Classifier
 
-function est = MAP( x, y, classes_in_case, probability )
+function est = MAP( x, y, classes_in_case, i, j, probability, pdf )
     est = 0;
     
     %% Case 1
     if length(classes_in_case) == 2
         A = classes_in_case(1);
         B = classes_in_case(2);
-
-        p_x_A = mvnpdf( [x, y], A.mu', A.sigma );
-        p_x_B = mvnpdf( [x, y], B.mu', B.sigma );
+        
+        % testing case where you cannot get easily get the pre-calculated
+        % pdf values
+        if i == -1 && j == -1
+            p_x_A = mvnpdf( [x, y], A.mu', A.sigma );
+            p_x_B = mvnpdf( [x, y], B.mu', B.sigma );
+        else
+            p_x_A = pdf{1}(j,i);
+            p_x_B = pdf{2}(j,i);
+        end
         
         I = log( p_x_A / p_x_B );
         
@@ -25,13 +32,21 @@ function est = MAP( x, y, classes_in_case, probability )
         D = classes_in_case(2);
         E = classes_in_case(3);
         
-        p_x_c = mvnpdf( [x, y], C.mu', C.sigma );
-        p_x_d = mvnpdf( [x, y], D.mu', D.sigma );
-        p_x_e = mvnpdf( [x, y], E.mu', E.sigma );
+        % testing case where you cannot get easily get the pre-calculated
+        % pdf values
+        if i == -1 && j == -1
+            p_x_C = mvnpdf( [x, y], C.mu', C.sigma );
+            p_x_D = mvnpdf( [x, y], D.mu', D.sigma );
+            p_x_E = mvnpdf( [x, y], E.mu', E.sigma );
+        else
+            p_x_C = pdf{1}(j,i);
+            p_x_D = pdf{2}(j,i);
+            p_x_E = pdf{3}(j,i);
+        end
         
-        p_c = p_x_c / probability.C;
-        p_d = p_x_d / probability.D;
-        p_e = p_x_e / probability.E;
+        p_c = p_x_C / probability.C;
+        p_d = p_x_D / probability.D;
+        p_e = p_x_E / probability.E;
         
         diffPCD = p_c - p_d;
         diffPDE = p_d - p_e;
