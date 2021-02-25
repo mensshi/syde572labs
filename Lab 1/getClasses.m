@@ -38,18 +38,20 @@ function classes = getClasses()
             [classes(i).V, classes(i).D] = eig(classes(i).sigma);
         end
         %L = lamba, W = whitening/transform
-        [classes(i).L, classes(i).W, classes(i).samples] = genSampleData( classes(i) );
+        classes(i).samples = genSampleData( classes(i) );
         classes(i).X1 = classes(i).samples(:, 1);
         classes(i).X2 = classes(i).samples(:, 2);
         
         classes(i).stdContour = genStdContour( classes(i) );
+        
+        classes(i).invSigma = inv( classes(i).sigma );
     end
 end
 
 %% Helper functions
 
 % Generates class samples and whitening matrix based on mean and covariance
-function [ L, W, samples] = genSampleData( class )
+function samples = genSampleData( class )
 
     L = class.D^(-1/2); % lambda matrix
     W = L * class.V'; % whitening matrix

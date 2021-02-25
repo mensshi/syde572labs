@@ -5,46 +5,28 @@ function est = MED( x, y, classes_in_case)
     
     %% Case 1
     if length(classes_in_case) == 2
-        A = classes_in_case(1);
-        B = classes_in_case(2);
         
-        distA = pdist( [ x y; A.mu(1) A.mu(2) ], 'euclidean' );
-        distB = pdist( [ x y; B.mu(1) B.mu(2) ], 'euclidean' );
+        dist_A = ( x - classes_in_case(1).mu(1) )^2 + ( y - classes_in_case(1).mu(2) )^2 ;
+        dist_B = ( x - classes_in_case(2).mu(1) )^2 + ( y - classes_in_case(2).mu(2) )^2 ;
 
-        if (distA < distB)
+        if (dist_A < dist_B)
             est = 1;
-        elseif (distA > distB)
+        elseif (dist_A > dist_B)
             est = 2;
         end
     
     %% Case 2
     else
-        C = classes_in_case(1);
-        D = classes_in_case(2);
-        E = classes_in_case(3);
         
-        distC = pdist( [ x y; C.mu(1) C.mu(2) ], 'euclidean' );
-        distD = pdist( [ x y; D.mu(1) D.mu(2) ], 'euclidean' );
-        distE = pdist( [ x y; E.mu(1) E.mu(2) ], 'euclidean' );
+        dist_C = ( x - classes_in_case(1).mu(1) )^2 + ( y - classes_in_case(1).mu(2) )^2 ;
+        dist_D = ( x - classes_in_case(2).mu(1) )^2 + ( y - classes_in_case(2).mu(2) )^2 ;
+        dist_E = ( x - classes_in_case(3).mu(1) )^2 + ( y - classes_in_case(3).mu(2) )^2 ;
 
-        diffCD = distC-distD;
-        diffDE = distD-distE;
-        diffEC = distC-distE;
-
-        % Covers cases with 0 diff, but closer to third
-        if      diffCD == 0 && distE < distC
-            est = 3;
-        elseif  diffDE == 0 && distC < distD
+        if  dist_C < dist_D && ( dist_C < dist_E || dist_D - dist_E == 0 )
             est = 1;
-        elseif  diffEC == 0 && distD < distE
+        elseif  dist_D < dist_E && ( dist_D < dist_C || dist_E - dist_C == 0 )
             est = 2;
-
-        % Finds min
-        elseif  distC < distD && distC < distE
-            est = 1;
-        elseif  distD < distC && distD < distE
-            est = 2;
-        elseif  distE < distC && distE < distD
+        elseif  dist_E < dist_C && ( dist_E < dist_D || dist_C - dist_D == 0 )
             est = 3;
 
         % Else est = 0
