@@ -17,25 +17,25 @@ function est = NN( x, y, classes_in_case)
         % assign est = 1 (A)
         % else est = 2 (B)
 
-        nnDistA = pdist( [ x y; A.X1(1) A.X2(1) ], 'euclidean' );
+        nnDist_A = ( x - A.mu(1) )^2 + ( y - A.mu(2) )^2 ;
         for i = 2:size(A.samples,1)
-            dist = pdist( [ x y; A.X1(i) A.X2(i) ], 'euclidean' );
-            if (dist < nnDistA)
-                nnDistA = dist;
+            dist = ( x - A.X1(i) )^2 + ( y - A.X2(i) )^2 ;
+            if (dist < nnDist_A)
+                nnDist_A = dist;
             end
         end
 
-        nnDistB = pdist( [ x y; B.X1(1) B.X2(1) ], 'euclidean' );
+        nnDist_B = ( x - B.mu(1) )^2 + ( y - B.mu(2) )^2 ;
         for i = 2:size(B.samples,1)
-            dist = pdist( [ x y; B.X1(i) B.X2(i) ], 'euclidean' );
-            if (dist < nnDistB)
-                nnDistB = dist;
+            dist = ( x - B.X1(i) )^2 + ( y - B.X2(i) )^2 ;
+            if (dist < nnDist_B)
+                nnDist_B = dist;
             end
         end
 
-        if (nnDistA < nnDistB)
+        if (nnDist_A < nnDist_B)
             est = 1;
-        elseif (nnDistA > nnDistB)
+        elseif (nnDist_A > nnDist_B)
             est = 2;
         end
         % leave as est = 0 for undetermined class
@@ -46,49 +46,38 @@ function est = NN( x, y, classes_in_case)
         D = classes_in_case(2);
         E = classes_in_case(3);
         
-        nnDistC = pdist( [ x y; C.X1(1) C.X2(1) ], 'euclidean' );
+        nnDist_C = ( x - C.mu(1) )^2 + ( y - C.mu(2) )^2 ;
         for i = 2:size(C.samples,1)
-            dist = pdist( [ x y; C.X1(i) C.X2(i) ], 'euclidean' );
-            if (dist < nnDistC)
-                nnDistC = dist;
+            dist = ( x - C.X1(i) )^2 + ( y - C.X2(i) )^2 ;
+            if (dist < nnDist_C)
+                nnDist_C = dist;
             end
         end
 
-        nnDistD = pdist( [ x y; D.X1(1) D.X2(1) ], 'euclidean' );
+        nnDist_D = ( x - D.mu(1) )^2 + ( y - D.mu(2) )^2 ;
+        for i = 2:size(D.samples,1)
+            dist = ( x - D.X1(i) )^2 + ( y - D.X2(i) )^2 ;
+            if (dist < nnDist_D)
+                nnDist_D = dist;
+            end
+        end
+
+        nnDist_E = ( x - E.mu(1) )^2 + ( y - E.mu(2) )^2 ;
         for i = 2:size(E.samples,1)
-            dist = pdist( [ x y; D.X1(i) D.X2(i) ], 'euclidean' );
-            if (dist < nnDistD)
-                nnDistD = dist;
+            dist = ( x - E.X1(i) )^2 + ( y - E.X2(i) )^2 ;
+            if (dist < nnDist_E)
+                nnDist_E = dist;
             end
         end
-
-        nnDistE = pdist( [ x y; E.X1(1) E.X2(1) ], 'euclidean' );
-        for i = 2:size(E.samples,1)
-            dist = pdist( [ x y; E.X1(i) E.X2(i) ], 'euclidean' );
-            if (dist < nnDistE)
-                nnDistE = dist;
-            end
-        end
-
-        diffCD = nnDistC-nnDistD;
-        diffDE = nnDistD-nnDistE;
-        diffEC = nnDistE-nnDistC;
-
-        % Covers cases with 0 diff, but closer to third
-        if      diffCD == 0 && nnDistE < nnDistC
-            est = 5;
-        elseif  diffDE == 0 && nnDistC < nnDistD
-            est = 3;
-        elseif  diffEC == 0 && nnDistD < nnDistE
-            est = 4;
 
         % Finds min
-        elseif  nnDistC < nnDistD && nnDistC < nnDistE
-            est = 3;
-        elseif  nnDistD < nnDistC && nnDistD < nnDistE
-            est = 4;
-        elseif  nnDistE < nnDistC && nnDistE < nnDistD
-            est = 5;   
+        % Covers cases with 0 diff, but closer to third
+        if  nnDist_C < nnDist_D && ( nnDist_C < nnDist_E || nnDist_D-nnDist_E == 0 )
+            est = 1;
+        elseif  nnDist_D < nnDist_C && ( nnDist_D < nnDist_E || nnDist_E-nnDist_C == 0 )
+            est = 2;
+        elseif  nnDist_E < nnDist_C && ( nnDist_E < nnDist_D || nnDist_C-nnDist_D == 0 )
+            est = 3;   
         end
     end
 end

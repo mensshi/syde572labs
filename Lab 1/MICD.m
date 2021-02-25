@@ -22,6 +22,8 @@ function est = MICD( x, y, classes_in_case)
         dist_D = getMICD( x, y, classes_in_case(2) );
         dist_E = getMICD( x, y, classes_in_case(3) );
 
+        % Finds min
+        % Covers cases with 0 diff, but closer to third
         if  dist_C < dist_D && ( dist_C < dist_E || dist_D - dist_E == 0 )
             est = 1;
         elseif  dist_D < dist_E && ( dist_D < dist_C || dist_E - dist_C == 0 )

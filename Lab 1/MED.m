@@ -22,6 +22,8 @@ function est = MED( x, y, classes_in_case)
         dist_D = ( x - classes_in_case(2).mu(1) )^2 + ( y - classes_in_case(2).mu(2) )^2 ;
         dist_E = ( x - classes_in_case(3).mu(1) )^2 + ( y - classes_in_case(3).mu(2) )^2 ;
 
+        % Finds min
+        % Covers cases with 0 diff, but closer to third
         if  dist_C < dist_D && ( dist_C < dist_E || dist_D - dist_E == 0 )
             est = 1;
         elseif  dist_D < dist_E && ( dist_D < dist_C || dist_E - dist_C == 0 )
