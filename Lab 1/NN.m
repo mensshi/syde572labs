@@ -17,7 +17,7 @@ function est = NN( x, y, classes_in_case)
         % assign est = 1 (A)
         % else est = 2 (B)
 
-        nnDist_A = ( x - A.mu(1) )^2 + ( y - A.mu(2) )^2 ;
+        nnDist_A = ( x - A.X1(1) )^2 + ( y - A.X2(1) )^2 ;
         for i = 2:size(A.samples,1)
             dist = ( x - A.X1(i) )^2 + ( y - A.X2(i) )^2 ;
             if (dist < nnDist_A)
@@ -25,7 +25,7 @@ function est = NN( x, y, classes_in_case)
             end
         end
 
-        nnDist_B = ( x - B.mu(1) )^2 + ( y - B.mu(2) )^2 ;
+        nnDist_B = ( x - B.X1(1) )^2 + ( y - B.X2(1) )^2 ;
         for i = 2:size(B.samples,1)
             dist = ( x - B.X1(i) )^2 + ( y - B.X2(i) )^2 ;
             if (dist < nnDist_B)
@@ -46,7 +46,7 @@ function est = NN( x, y, classes_in_case)
         D = classes_in_case(2);
         E = classes_in_case(3);
         
-        nnDist_C = ( x - C.mu(1) )^2 + ( y - C.mu(2) )^2 ;
+        nnDist_C = ( x - C.X1(1) )^2 + ( y - C.X2(1) )^2 ;
         for i = 2:size(C.samples,1)
             dist = ( x - C.X1(i) )^2 + ( y - C.X2(i) )^2 ;
             if (dist < nnDist_C)
@@ -54,7 +54,7 @@ function est = NN( x, y, classes_in_case)
             end
         end
 
-        nnDist_D = ( x - D.mu(1) )^2 + ( y - D.mu(2) )^2 ;
+        nnDist_D = ( x - D.X1(1) )^2 + ( y - D.X2(1) )^2 ;
         for i = 2:size(D.samples,1)
             dist = ( x - D.X1(i) )^2 + ( y - D.X2(i) )^2 ;
             if (dist < nnDist_D)
@@ -62,7 +62,7 @@ function est = NN( x, y, classes_in_case)
             end
         end
 
-        nnDist_E = ( x - E.mu(1) )^2 + ( y - E.mu(2) )^2 ;
+        nnDist_E = ( x - E.X1(1) )^2 + ( y - E.X2(1) )^2 ;
         for i = 2:size(E.samples,1)
             dist = ( x - E.X1(i) )^2 + ( y - E.X2(i) )^2 ;
             if (dist < nnDist_E)
