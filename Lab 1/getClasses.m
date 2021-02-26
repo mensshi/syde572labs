@@ -58,11 +58,10 @@ end
 % Generates class samples and whitening matrix based on mean and covariance
 function samples = genSampleData( class, V, D )
 
-    L = D^(-1/2); % lambda matrix
     mean_array = repmat( class.mu', class.N, 1 ); % replicated array of mean
     
     % applies inverse whitening matrix to generated normal distribution
-    samples = randn( class.N, 2) * inv(V) * inv(L) + mean_array;
+    samples = randn( class.N, 2) * inv(V) * D^(1/2) + mean_array;
     
 end
 
