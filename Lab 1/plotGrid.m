@@ -29,7 +29,7 @@ function plotGrid( classes, cases )
     axis equal
     pbaspect([1 1 1])
     
-    %% Case 1 - NN (uncomment)
+    %% Case 1 - NN
     
     figure
     plot( A.X1, A.X2, 'b.' )
@@ -47,23 +47,23 @@ function plotGrid( classes, cases )
     axis equal
     pbaspect([1 1 1])
     
-    %% Case 1 - kNN (uncomment)
+    %% Case 1 - kNN
     
-%     figure
-%     plot( A.X1, A.X2, 'b.' )
-%     hold on
-%     plot( B.X1, B.X2, 'r.' )
-%     contour( C1.X1, C1.X2, C1.Grid.kNN, 2, 'k', 'LineWidth', 1.5 )
-%     
-%     plot( A.stdContour.X, A.stdContour.Y, 'b', 'MarkerSize', 3 )
-%     plot( B.stdContour.X, B.stdContour.Y, 'r', 'MarkerSize', 3 )
-% 
-%     title( 'A B (kNN)' );
-%     xlabel( 'x1' );
-%     ylabel( 'x2' );
-%     legend( 'A', 'B', 'kNN' );
-%     axis equal
-%     pbaspect([1 1 1])
+    figure
+    plot( A.X1, A.X2, 'b.' )
+    hold on
+    plot( B.X1, B.X2, 'r.' )
+    contour( C1.X1, C1.X2, C1.Grid.kNN, 2, 'k', 'LineWidth', 1.5 )
+    
+    plot( A.stdContour.X, A.stdContour.Y, 'b', 'MarkerSize', 3 )
+    plot( B.stdContour.X, B.stdContour.Y, 'r', 'MarkerSize', 3 )
+
+    title( 'A B (kNN)' );
+    xlabel( 'x1' );
+    ylabel( 'x2' );
+    legend( 'A', 'B', 'kNN' );
+    axis equal
+    pbaspect([1 1 1])
     
     %% Case 2 - Dist
     
@@ -88,7 +88,7 @@ function plotGrid( classes, cases )
     axis equal
     pbaspect([1 1 1])
     
-    %% Case 2 - NN (uncomment)
+    %% Case 2 - NN
     
     figure
     plot( C.X1, C.X2, 'b.' )
@@ -109,25 +109,25 @@ function plotGrid( classes, cases )
     axis equal
     pbaspect([1 1 1])
     
-    %% Case 2 - kNN (uncomment)
+    %% Case 2 - kNN
     
-%     figure
-%     plot( C.X1, C.X2, 'b.' )
-%     hold on
-%     plot( D.X1, D.X2, 'r.' )
-%     plot( E.X1, E.X2, 'g.' )
-%     
-%     contour( C2.X1, C2.X2, C2.Grid.kNN, 2, 'k', 'LineWidth', 1.5 )
-%     
-%     plot( C.stdContour.X, C.stdContour.Y, 'b', 'MarkerSize', 3 )
-%     plot( D.stdContour.X, D.stdContour.Y, 'r', 'MarkerSize', 3 )
-%     plot( E.stdContour.X, E.stdContour.Y, 'g', 'MarkerSize', 3 )
-% 
-%     title( 'C D E (kNN)' );
-%     xlabel( 'x1' );
-%     ylabel( 'x2' );
-%     legend( 'C', 'D', 'E', 'kNN' );
-%     axis equal
-%     pbaspect([1 1 1])
+    figure
+    plot( C.X1, C.X2, 'b.' )
+    hold on
+    plot( D.X1, D.X2, 'r.' )
+    plot( E.X1, E.X2, 'g.' )
+    
+    contour( C2.X1, C2.X2, C2.Grid.kNN, 2, 'k', 'LineWidth', 1.5 )
+    
+    plot( C.stdContour.X, C.stdContour.Y, 'b', 'MarkerSize', 3 )
+    plot( D.stdContour.X, D.stdContour.Y, 'r', 'MarkerSize', 3 )
+    plot( E.stdContour.X, E.stdContour.Y, 'g', 'MarkerSize', 3 )
+
+    title( 'C D E (kNN)' );
+    xlabel( 'x1' );
+    ylabel( 'x2' );
+    legend( 'C', 'D', 'E', 'kNN' );
+    axis equal
+    pbaspect([1 1 1])
     
 end
