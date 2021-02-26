@@ -1,6 +1,6 @@
 % MAP Classifier
 
-function est = MAP( x, y, classes_in_case, i, j, probability, pdf )
+function est = MAP( x, y, classes_in_case, threshold )
     est = 0;
     
     %% Case 1
@@ -8,21 +8,11 @@ function est = MAP( x, y, classes_in_case, i, j, probability, pdf )
         A = classes_in_case(1);
         B = classes_in_case(2);
         
-        % testing case where you cannot get easily get the pre-calculated
-        % pdf values
-        if i == -1 && j == -1
-            p_x_A = mvnpdf( [x, y], A.mu', A.sigma );
-            p_x_B = mvnpdf( [x, y], B.mu', B.sigma );
-        else
-            p_x_A = pdf{1}(j,i);
-            p_x_B = pdf{2}(j,i);
-        end
+        l = l_class( x, y, B ) - l_class( x, y, A );
         
-        I = log( p_x_A / p_x_B );
-        
-        if I > probability.threshold
+        if l > threshold
             est = 1;
-        elseif I < probability.threshold
+        elseif l < threshold
             est = 2;
         end
         
@@ -32,43 +22,26 @@ function est = MAP( x, y, classes_in_case, i, j, probability, pdf )
         D = classes_in_case(2);
         E = classes_in_case(3);
         
-        % testing case where you cannot get easily get the pre-calculated
-        % pdf values
-        if i == -1 && j == -1
-            p_x_C = mvnpdf( [x, y], C.mu', C.sigma );
-            p_x_D = mvnpdf( [x, y], D.mu', D.sigma );
-            p_x_E = mvnpdf( [x, y], E.mu', E.sigma );
-        else
-            p_x_C = pdf{1}(j,i);
-            p_x_D = pdf{2}(j,i);
-            p_x_E = pdf{3}(j,i);
-        end
-        
-        p_c = p_x_C / probability.C;
-        p_d = p_x_D / probability.D;
-        p_e = p_x_E / probability.E;
-        
-        diffPCD = p_c - p_d;
-        diffPDE = p_d - p_e;
-        diffPEC = p_e - p_c;
-        
-        if      diffPCD == 0 && p_e > p_c
-            est = 3;
-        elseif  diffPDE == 0 && p_c > p_d
+        l_C_D = l_class( x, y, D ) - l_class( x, y, C );
+        l_D_E = l_class( x, y, E ) - l_class( x, y, D );
+        l_E_C = l_class( x, y, C ) - l_class( x, y, E );
+                       
+        if  l_C_D > threshold.C_D && l_E_C < threshold.E_C
             est = 1;
-        elseif  diffPEC == 0 && p_d > p_e
+        elseif  l_D_E > threshold.D_E && l_C_D < threshold.C_D
             est = 2;
-
-        % Finds min
-        elseif  p_c > p_d && p_c > p_e
-            est = 1;
-        elseif  p_d > p_c && p_d > p_e
-            est = 2;
-        elseif  p_e > p_c && p_e > p_d
+        elseif  l_E_C > threshold.E_C && l_D_E < threshold.D_E
             est = 3;
 
         % Else est = 0
         end
         
     end
+end
+
+%% Helper function
+% exponent part of p_x_class * -2
+function l_class = l_class( x, y, class )
+    diff = [x y]' - class.mu;
+    l_class = diff' * class.invSigma * diff ;
 end

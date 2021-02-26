@@ -32,48 +32,48 @@ function classes = getClasses()
         % this is because for A and B, eig(sigma) returns V = [0 1; 1 0],
         % which rotates all points by 90 deg
         if i <= 2
-            classes(i).D = classes(i).sigma; %eigenval
-            classes(i).V = [1 0; 0 1]; %eigenvec
+            V = [1 0; 0 1]; %eigenvec
+            D = classes(i).sigma; %eigenval
         else
-            [classes(i).V, classes(i).D] = eig(classes(i).sigma);
+            [V, D] = eig(classes(i).sigma);
         end
-        %L = lamba, W = whitening/transform
-        classes(i).samples = genSampleData( classes(i) );
+        
+        classes(i).samples = genSampleData( classes(i), V, D );
         classes(i).X1 = classes(i).samples(:, 1);
         classes(i).X2 = classes(i).samples(:, 2);
         
-        classes(i).stdContour = genStdContour( classes(i) );
+        classes(i).test_samples = genSampleData( classes(i), V, D );
+        classes(i).test_X1 = classes(i).test_samples(:, 1);
+        classes(i).test_X2 = classes(i).test_samples(:, 2);
+        
+        classes(i).stdContour = genStdContour( classes(i).mu, V, sqrt(D(1,1)), sqrt(D(2,2)) );
         
         classes(i).invSigma = inv( classes(i).sigma );
+        classes(i).det = det( classes(i).sigma );
     end
 end
 
 %% Helper functions
 
 % Generates class samples and whitening matrix based on mean and covariance
-function samples = genSampleData( class )
+function samples = genSampleData( class, V, D )
 
-    L = class.D^(-1/2); % lambda matrix
-    W = L * class.V'; % whitening matrix
+    L = D^(-1/2); % lambda matrix
     mean_array = repmat( class.mu', class.N, 1 ); % replicated array of mean
     
     % applies inverse whitening matrix to generated normal distribution
-    samples = randn( class.N, 2) * inv(class.V) * inv(L) + mean_array;
+    samples = randn( class.N, 2) * inv(V) * inv(L) + mean_array;
     
 end
 
 % Generates unit standard deviation contour based on original data (not
 % samples)
-function stdContour = genStdContour( class )
+function stdContour = genStdContour( mu, V, x_rad, y_rad )
 
     % atan2 has to be (y, x)
-    theta = atan2( class.V(2,1), class.V(1,1) );
+    theta = atan2( V(2,1), V(1,1) );
     t = linspace(0,2*pi,100);
-    a = sqrt(class.D(1,1));
-    b = sqrt(class.D(2,2));
-    x0 = class.mu(1);
-    y0 = class.mu(2);
-    stdContour.X = x0 + a*cos(t)*cos(theta) - b*sin(t)*sin(theta);
-    stdContour.Y = y0 + b*sin(t)*cos(theta) + a*cos(t)*sin(theta);
+    stdContour.X = mu(1) + x_rad*cos(t)*cos(theta) - y_rad*sin(t)*sin(theta);
+    stdContour.Y = mu(2) + y_rad*sin(t)*cos(theta) + x_rad*cos(t)*sin(theta);
     
 end

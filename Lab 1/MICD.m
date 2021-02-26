@@ -38,6 +38,6 @@ end
 
 %% Helper functions
 function dist = getMICD( x, y, class )
-    diff = [x,y]' - class.mu;
+    diff = [x y]' - class.mu;
     dist = (diff'*class.invSigma*diff)^(1/2);
 end
