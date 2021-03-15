@@ -5,10 +5,10 @@ function pdf = Non_Parametric_Estimator( X, samples, std )
         
     %% ME1D
     if isequal( size( samples ), [ 100 1 ] )
-        pdf = zeros( 1, length( X ));
+        pdf = 0;
 
         for i = 1:length( samples )
-            pdf = pdf + normpdf( X, samples(i), std );
+            pdf = pdf + exp(-0.5 * ( X-samples(i) )^2 / std^2) / ( std * sqrt(2*pi) );
         end
 
         pdf = pdf / length( samples );

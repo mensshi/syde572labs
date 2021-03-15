@@ -4,20 +4,24 @@
 
 clear % clear all variables from memory
 close all  % close all open figures
+rng( 'default' );
 
 % loads data and allocates information
 [ ME1D, ME2D, SD ] = loadData();
 
 % runs estimators
-[ ME1D, ME2D, SD ] = runEst( ME1D, ME2D, SD );
+[ ME1D, ME2D ] = runEst( ME1D, ME2D );
 
-% classify grid
-ME2D = gridClass( ME2D );
-
-% error analysis for discriminants?
+% classify grid/points
+[ ME1D, ME2D ] = gridClass( ME1D, ME2D );
 
 % plots all datasets and estimations
-plotData( ME1D, ME2D, SD );
+plotData( ME1D, ME2D );
+
+% sequential classifier
+
+
+% error analysis for discriminants?
 
 
 %% Helper functions

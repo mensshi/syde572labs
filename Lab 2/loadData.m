@@ -17,6 +17,11 @@ function [ ME1D, ME2D, SD ] = loadData()
     load('lab2_3.mat');
     SD.A.samples = a;
     SD.B.samples = b;
+    
+    %% ME1D true values
+    ME1D.A.true.mu = 5;
+    ME1D.A.true.sigma = 1;
+    ME1D.B.true = 1;
         
     %% Set plot data
     
@@ -28,16 +33,12 @@ function [ ME1D, ME2D, SD ] = loadData()
     
     ME1D.sub1 = subplot(1,2,1);
     set(0, 'DefaultLineLineWidth', 2);
-    area( ME1D.X, normpdf( ME1D.X, 5, 1 ) ); % true distribution; values from lab
-    hold on;
     title( 'Class A' )
     xlabel( 'x1' );
     ylabel( 'x2' );
     
     ME1D.sub2 = subplot(1,2,2);
     set(0, 'DefaultLineLineWidth', 2);
-    area( ME1D.X, exppdf( ME1D.X, 1 ) ); % true distribution; values from lab
-    hold on;
     title( 'Class B' )
     xlabel( 'x1' );
     ylabel( 'x2' );
@@ -74,14 +75,25 @@ function [ ME1D, ME2D, SD ] = loadData()
     
     [ SD.X, SD.Y, SD.Meshgrid ] = getPlotData(gca);
 
+    %% Ugly set-up stuff
+    temp = zeros( 1, length( ME1D.X) );
+    Grid.true = temp;
+    Grid.PE_G = temp;
+    Grid.PE_E = temp;
+    Grid.NPE1 = temp;
+    Grid.NPE2 = temp;
+    
+    ME1D.A.Grid = Grid;
+    ME1D.B.Grid = Grid;
+    
 end
 
 %% Helper functions
 
 function [ XAxis, YAxis, X ] = getPlotData( axes )
 
-    XAxis = axes.XLim(1): (axes.XLim(2)-axes.XLim(1))/100 :axes.XLim(2);
-    YAxis = axes.YLim(1): (axes.YLim(2)-axes.YLim(1))/100 :axes.YLim(2);
+    XAxis = axes.XLim(1): 1 :axes.XLim(2);
+    YAxis = axes.YLim(1): 1 :axes.YLim(2);
     [X1, X2] = meshgrid(XAxis, YAxis);
     X = [X1(:) X2(:)];
     

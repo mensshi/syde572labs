@@ -1,22 +1,28 @@
-function plotData( ME1D, ME2D, SD )
+function plotData( ME1D, ME2D )
     %% Model Estimation 1D
     X = ME1D.X;
+    Grid_A = ME1D.A.Grid;
+    Grid_B = ME1D.B.Grid;
     figure( ME1D.fig );
     
     subplot( ME1D.sub1 );
-    plot( X, normpdf( X, ME1D.A.PE_G.mu, ME1D.A.PE_G.sigma ) )
-    plot( X, exppdf( X, ME1D.A.PE_E ) )
+    area( X, Grid_A.true );
+    hold on
+    plot( X, Grid_A.PE_G )
+    plot( X, Grid_A.PE_E )
     yline( ME1D.A.PE_U, 'LineWidth', 2 )
-    plot( X, ME1D.A.NPE1 )
-    plot( X, ME1D.A.NPE2 )
+    plot( X, Grid_A.NPE1 )
+    plot( X, Grid_A.NPE2 )
     legend( 'True', 'PE - Gaussian', 'PE - Exponential', 'PE - Uniform', 'NPE - Parzan 0.1', 'NPE - Parzen 0.4' );
     
     subplot( ME1D.sub2 );
-    plot( X, normpdf( X, ME1D.B.PE_G.mu, ME1D.B.PE_G.sigma ) )
-    plot( X, exppdf( X, ME1D.B.PE_E ) )
+    area( X, Grid_B.true );
+    hold on
+    plot( X, Grid_B.PE_G )
+    plot( X, Grid_B.PE_E )
     yline( ME1D.B.PE_U, 'LineWidth', 2 )
-    plot( X, ME1D.B.NPE1 )
-    plot( X, ME1D.B.NPE2 )
+    plot( X, Grid_B.NPE1 )
+    plot( X, Grid_B.NPE2 )
     legend( 'True', 'PE - Gaussian', 'PE - Exponential', 'PE - Uniform', 'NPE - Parzan 0.1', 'NPE - Parzen 0.4' );
     
     %% Model Estimation 2D
@@ -27,6 +33,4 @@ function plotData( ME1D, ME2D, SD )
     figure( ME2D.fig );
 %     contour( X, Y, ME2D.Grid.PE );
     legend();
-    
-    %% Sequential Discriminants
 end
