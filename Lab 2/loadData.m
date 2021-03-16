@@ -60,21 +60,6 @@ function [ ME1D, ME2D, SD ] = loadData()
     
     [ ME2D.X, ME2D.Y, ME2D.Meshgrid ] = getPlotData(gca);
 
-    % SD
-    SD.fig = figure;
-    
-    plot( SD.A.samples(:,1), SD.A.samples(:,2), 'b.' );
-    hold on
-    plot( SD.B.samples(:,1), SD.B.samples(:,2), 'r.' );
-    
-    title( 'Sequential Discriminants' )
-    xlabel( 'x1' );
-    ylabel( 'x2' );
-    axis equal
-    pbaspect([1 1 1])
-    
-    [ SD.X, SD.Y, SD.Meshgrid ] = getPlotData(gca);
-
     %% Ugly set-up stuff
     temp = zeros( 1, length( ME1D.X) );
     Grid.true = temp;
