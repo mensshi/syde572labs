@@ -10,7 +10,7 @@ function plotData( ME1D, ME2D )
     hold on
     plot( X, Grid_A.PE_G )
     plot( X, Grid_A.PE_E )
-    yline( ME1D.A.PE_U, 'LineWidth', 2 )
+    plot( X, Grid_A.PE_U )
     plot( X, Grid_A.NPE1 )
     plot( X, Grid_A.NPE2 )
     legend( 'True', 'PE - Gaussian', 'PE - Exponential', 'PE - Uniform', 'NPE - Parzan 0.1', 'NPE - Parzen 0.4' );
@@ -20,7 +20,7 @@ function plotData( ME1D, ME2D )
     hold on
     plot( X, Grid_B.PE_G )
     plot( X, Grid_B.PE_E )
-    yline( ME1D.B.PE_U, 'LineWidth', 2 )
+    plot( X, Grid_B.PE_U )
     plot( X, Grid_B.NPE1 )
     plot( X, Grid_B.NPE2 )
     legend( 'True', 'PE - Gaussian', 'PE - Exponential', 'PE - Uniform', 'NPE - Parzan 0.1', 'NPE - Parzen 0.4' );

@@ -15,9 +15,9 @@ function variable = PE_Gaussian( samples )
         mu = mu/N;
         
         for j = 1:N
-            sigma = sigma + (samples(i) - mu)^2;
+            sigma = sigma + (samples(j) - mu)^2;
         end
-        sigma = sigma/N;
+        sigma = sqrt(sigma/N);
     
     %% ME2D
     else

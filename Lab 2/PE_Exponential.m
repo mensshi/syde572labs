@@ -1,5 +1,11 @@
 % Parametric Estimator - Exponential
 
-function lambda = PE_Exponential( samples )
-    lambda = 5;
+function variable = PE_Exponential( samples )
+    lambda = 0;
+    N = size(samples, 1);
+    for i = 1:N
+        lambda = lambda + samples(i);
+    end
+    lambda = N/lambda;
+    variable.lambda = lambda;
 end

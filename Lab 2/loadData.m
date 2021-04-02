@@ -21,7 +21,7 @@ function [ ME1D, ME2D, SD ] = loadData()
     %% ME1D true values
     ME1D.A.true.mu = 5;
     ME1D.A.true.sigma = 1;
-    ME1D.B.true = 1;
+    ME1D.B.true.lambda = 1;
         
     %% Set plot data
     

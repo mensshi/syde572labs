@@ -18,15 +18,15 @@ rng( 'default' );
 % plots all datasets and estimations
 plotData( ME1D, ME2D );
 
-% sequential classifier
-SD.SC{1} = getSC( SD.A.samples, SD.B.samples, -1 );
-SD.SC{2} = getSC( SD.A.samples, SD.B.samples, -1 );
-SD.SC{3} = getSC( SD.A.samples, SD.B.samples, -1 );
+% % sequential classifier
+% SD.SC{1} = getSC( SD.A.samples, SD.B.samples, -1 );
+% SD.SC{2} = getSC( SD.A.samples, SD.B.samples, -1 );
+% SD.SC{3} = getSC( SD.A.samples, SD.B.samples, -1 );
 % 
 % % plot sequential classifers
-plotSD( SD );
-
-% error analysis for discriminants?
-errorSD( SD );
+% plotSD( SD );
+% 
+% % error analysis for discriminants?
+% errorSD( SD );
 
 %% Helper functions
