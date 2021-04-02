@@ -23,6 +23,18 @@ function variable = PE_Gaussian( samples )
     else
         mu = [ 0 0 ]';
         sigma = [ 1 0; 0 1 ];
+        
+        N = size(samples, 1);
+        for i = 1:N
+            mu = mu + samples(i)';
+        end
+        mu = mu/N;
+        
+        for j = 1:N
+            temp = (samples(j) - mu);
+            sigma = sigma + temp*(temp');
+        end
+        sigma = sqrt(sigma/N);
     end
     
     variable.mu = mu;
