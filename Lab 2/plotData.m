@@ -31,6 +31,6 @@ function plotData( ME1D, ME2D )
     L = ME2D.L;
     
     figure( ME2D.fig );
-%     contour( X, Y, ME2D.Grid.PE );
+     contour( X, Y, ME2D.Grid.PE );
     legend();
 end

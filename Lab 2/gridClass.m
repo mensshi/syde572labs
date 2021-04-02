@@ -25,13 +25,17 @@ function [ ME1D, ME2D ] = gridClass( ME1D, ME2D )
     ME2D.Grid.NPE = ME2D.Grid.PE;
     L = ME2D.L;
     
+    threshold.A_B = getThreshold( L.A.PE, L.B.PE );
+    threshold.B_C = getThreshold( L.B.PE, L.C.PE );
+    threshold.C_A = getThreshold( L.C.PE, L.A.PE );
+    
     for i = 1:length( ME2D.X )
         x = ME2D.X(i);
         
         for j = 1:length( ME2D.Y )
             y = ME2D.Y(j);
             
-            ME2D.Grid.PE(j,i) = ML_PE_G( x, y, L.A.PE, L.B.PE, L.C.PE );
+            ME2D.Grid.PE(j,i) = MAP( x, y, L.A.PE, L.B.PE, L.C.PE, threshold );
             ME2D.Grid.NPE(j,i) = ML_NPE( x, y, L.A.NPE, L.B.NPE, L.C.NPE );
         end
     end
@@ -61,26 +65,18 @@ function pdf = getUPDF( x, class )
     end
 end
 
-function pdf = getGPDF2( x, y, class )
-    pdf = 0;
-end
-
-function est = ML_PE_G ( x, y, A, B, C )
-    est = 0;
-    
-    pdf_A = getGPDF2( x, y, A );
-    pdf_B = getGPDF2( x, y, B );
-    pdf_C = getGPDF2( x, y, C );
-    
-    if pdf_A > pdf_B && pdf_A > pdf_C
-        est = 1;
-    elseif pdf_B > pdf_A && pdf_B > pdf_C
-        est = 2;
-    elseif pdf_C > pdf_A && pdf_C > pdf_B
-        est = 3;
-    end
-end
-
 function est = ML_NPE ( x, y, A, B, C )
     est = 0;
+end
+
+%% Helper Function
+
+% greater class is assigned label if greater than threshold
+% lesser class is assigned label is lower than threshold
+function threshold = getThreshold( greater_class, lesser_class )
+    
+    g_det =     det(greater_class.sigma);
+    l_det = 	det(lesser_class.sigma);
+    
+    threshold = 2 * log( sqrt(g_det) / sqrt(l_det) ) ;
 end
