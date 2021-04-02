@@ -21,8 +21,8 @@ function [ ME1D, ME2D ] = gridClass( ME1D, ME2D )
     end
 
     %% ME2D
-    ME2D.Grid.PE = zeros( length( ME2D.X ), length( ME2D.Y ));
-    ME2D.Grid.NPE = NaN( length( ME2D.X ), length( ME2D.Y ));
+    ME2D.Grid.PE = zeros( length( ME2D.Y ), length( ME2D.X ));
+    ME2D.Grid.NPE = NaN( length( ME2D.Y ), length( ME2D.X ));
     L = ME2D.L;
     
     threshold.A_B = getThreshold( L.A.PE, L.B.PE );
@@ -63,10 +63,6 @@ function pdf = getUPDF( x, class )
     else
         pdf = class.y;
     end
-end
-
-function est = ML_NPE ( x, y, A, B, C )
-    est = 0;
 end
 
 %% Helper Function

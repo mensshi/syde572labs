@@ -77,8 +77,8 @@ end
 
 function [ XAxis, YAxis, X ] = getPlotData( axes )
 
-    XAxis = axes.XLim(1): 1 :axes.XLim(2);
-    YAxis = axes.YLim(1): 1 :axes.YLim(2);
+    XAxis = floor(axes.XLim(1)): 1 :ceil(axes.XLim(2));
+    YAxis = floor(axes.YLim(1)): 1 :ceil(axes.YLim(2));
     [X1, X2] = meshgrid(XAxis, YAxis);
     X = [X1(:) X2(:)];
     
