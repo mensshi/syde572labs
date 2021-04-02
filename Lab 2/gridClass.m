@@ -22,7 +22,7 @@ function [ ME1D, ME2D ] = gridClass( ME1D, ME2D )
 
     %% ME2D
     ME2D.Grid.PE = zeros( length( ME2D.X ), length( ME2D.Y ));
-    ME2D.Grid.NPE = ME2D.Grid.PE;
+    ME2D.Grid.NPE = NaN( length( ME2D.X ), length( ME2D.Y ));
     L = ME2D.L;
     
     threshold.A_B = getThreshold( L.A.PE, L.B.PE );
