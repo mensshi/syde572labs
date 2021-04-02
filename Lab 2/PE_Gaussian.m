@@ -7,7 +7,17 @@ function variable = PE_Gaussian( samples )
     %% ME1D
     if isequal( size( samples ), [ 100 1 ] )
         mu = 0;
-        sigma = 1;
+        sigma = 0;
+        N = size(samples, 1);
+        for i = 1:N
+            mu = mu + samples(i);
+        end
+        mu = mu/N;
+        
+        for j = 1:N
+            sigma = sigma + (samples(i) - mu)^2;
+        end
+        sigma = sigma/N;
     
     %% ME2D
     else
