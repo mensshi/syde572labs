@@ -6,7 +6,7 @@ function plotData( ME1D, ME2D )
     figure( ME1D.fig );
     
     subplot( ME1D.sub1 );
-    area( X, Grid_A.true );
+    area( X, Grid_A.true, 'FaceColor', 'k' );
     hold on
     plot( X, Grid_A.PE_G )
     plot( X, Grid_A.PE_E )
@@ -16,7 +16,7 @@ function plotData( ME1D, ME2D )
     legend( 'True', 'PE - Gaussian', 'PE - Exponential', 'PE - Uniform', 'NPE - Parzan 0.1', 'NPE - Parzen 0.4' );
     
     subplot( ME1D.sub2 );
-    area( X, Grid_B.true );
+    area( X, Grid_B.true, 'FaceColor', 'k' );
     hold on
     plot( X, Grid_B.PE_G )
     plot( X, Grid_B.PE_E )
@@ -31,6 +31,11 @@ function plotData( ME1D, ME2D )
     L = ME2D.L;
     
     figure( ME2D.fig );
-     contour( X, Y, ME2D.Grid.PE );
-    legend();
+    contour( X, Y, ME2D.Grid.PE, 'c', 'LineWidth', 1.5 );
+    hold on
+    contour( X, Y, ME2D.Grid.NPE, 'm--', 'LineWidth', 1.5 );
+    plot( L.A.PE.stdContour.X, L.A.PE.stdContour.Y, 'b', 'MarkerSize', 3 )
+    plot( L.B.PE.stdContour.X, L.B.PE.stdContour.Y, 'r', 'MarkerSize', 3 )
+    plot( L.C.PE.stdContour.X, L.C.PE.stdContour.Y, 'g', 'MarkerSize', 3 )
+    legend( 'A', 'B', 'C', 'PE - Gaussian', 'NPE - Parzan');
 end
