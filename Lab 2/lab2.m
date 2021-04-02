@@ -22,8 +22,8 @@ plotData( ME1D, ME2D );
 SD.SC{1} = getSC( SD.A.samples, SD.B.samples, -1 );
 SD.SC{2} = getSC( SD.A.samples, SD.B.samples, -1 );
 SD.SC{3} = getSC( SD.A.samples, SD.B.samples, -1 );
-
-% plot sequential classifers
+% 
+% % plot sequential classifers
 plotSD( SD );
 
 % error analysis for discriminants?

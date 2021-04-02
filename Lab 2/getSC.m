@@ -34,27 +34,11 @@ function SC = getSC( A, B, J )
         end
         
         if n_a_B == 0
-            old_B = B;
-            B = rand(0,2);
-            
-            for i = 1:size_B
-                if MED( old_B(i,:), pnt_A, pnt_B) == 1
-                    B = [B; old_B(i,:)];
-                end
-            end
-            G.errors = size(B,1);
+            B = applyG( B, pnt_A, pnt_B, 2 );
         end
         
         if n_b_A == 0
-            old_A = A;
-            A = rand(0,2);
-            
-            for i = 1:size_A
-                if MED( old_A(i,:), pnt_A, pnt_B) == 2
-                    A = [A; old_A(i,:)];
-                end
-            end
-            G.errors = size(A,1);
+            A = applyG( A, pnt_A, pnt_B, 1 );
         end
         
         G.pnt_A = pnt_A;

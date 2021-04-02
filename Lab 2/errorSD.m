@@ -8,15 +8,27 @@ function errorSD( SD )
             A = SD.A.samples;
             B = SD.B.samples;
             SC = getSC( A, B, J );
+            
+            for j = 1:size( SC, 2 )
+                G = SC(j);
+                pnt_A = G.pnt_A;
+                pnt_B = G.pnt_B;
+               
+                if G.n_a_B == 0
+                    B = applyG( B, pnt_A, pnt_B, 2 );
+                end
 
-            G = SC( size( SC, 2 ) );
-            error_rates(i) = G.errors;
+                if G.n_b_A == 0
+                    A = applyG( A, pnt_A, pnt_B, 1 );
+                end
+            end
+            
+            error_rates(i) = size(A,1) + size(B,1);
         end
         avg_e = sum(error_rates) / 20 / total;
         min_e = min(error_rates) / total;
         max_e = max(error_rates) / total;
         std_e = std(error_rates) / total;
-        error_rates
         J_errors(J,:) = [ avg_e, min_e, max_e, std_e ];
     end
     
