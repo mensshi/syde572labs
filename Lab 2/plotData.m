@@ -33,7 +33,7 @@ function plotData( ME1D, ME2D )
     figure( ME2D.fig );
     contour( X, Y, ME2D.Grid.PE, 'c', 'LineWidth', 1.5 );
     hold on
-    contour( X, Y, ME2D.Grid.NPE, 'm--', 'LineWidth', 1.5 );
+    contour( X, Y, ME2D.Grid.NPE, 'm', 'LineWidth', 1.5 );
     plot( L.A.PE.stdContour.X, L.A.PE.stdContour.Y, 'b', 'MarkerSize', 3 )
     plot( L.B.PE.stdContour.X, L.B.PE.stdContour.Y, 'r', 'MarkerSize', 3 )
     plot( L.C.PE.stdContour.X, L.C.PE.stdContour.Y, 'g', 'MarkerSize', 3 )

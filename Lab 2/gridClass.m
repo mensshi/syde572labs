@@ -8,15 +8,15 @@ function [ ME1D, ME2D ] = gridClass( ME1D, ME2D )
         ME1D.A.Grid.PE_G(i) = getGPDF( x, ME1D.A.PE_G );
         ME1D.A.Grid.PE_E(i) = getEPDF( x, ME1D.A.PE_E );
         ME1D.A.Grid.PE_U(i) = getUPDF( x, ME1D.A.PE_U );
-        ME1D.A.Grid.NPE1(i) = Non_Parametric_Estimator( x, ME1D.A.samples, 0.1 );
-        ME1D.A.Grid.NPE2(i) = Non_Parametric_Estimator( x, ME1D.A.samples, 0.4 );
+        ME1D.A.Grid.NPE1(i) = Non_Parametric_Estimator( x, 0, ME1D.A.samples, 0.1 );
+        ME1D.A.Grid.NPE2(i) = Non_Parametric_Estimator( x, 0, ME1D.A.samples, 0.4 );
         
         ME1D.B.Grid.true(i) = getEPDF( x, ME1D.B.true ); % Exponential
         ME1D.B.Grid.PE_G(i) = getGPDF( x, ME1D.B.PE_G );
         ME1D.B.Grid.PE_E(i) = getEPDF( x, ME1D.B.PE_E );
         ME1D.B.Grid.PE_U(i) = getUPDF( x, ME1D.B.PE_U );
-        ME1D.B.Grid.NPE1(i) = Non_Parametric_Estimator( x, ME1D.B.samples, 0.1 );
-        ME1D.B.Grid.NPE2(i) = Non_Parametric_Estimator( x, ME1D.B.samples, 0.4 );
+        ME1D.B.Grid.NPE1(i) = Non_Parametric_Estimator( x, 0, ME1D.B.samples, 0.1 );
+        ME1D.B.Grid.NPE2(i) = Non_Parametric_Estimator( x, 0, ME1D.B.samples, 0.4 );
         
     end
 
@@ -36,7 +36,7 @@ function [ ME1D, ME2D ] = gridClass( ME1D, ME2D )
             y = ME2D.Y(j);
             
             ME2D.Grid.PE(j,i) = MAP( x, y, L.A.PE, L.B.PE, L.C.PE, threshold );
-            ME2D.Grid.NPE(j,i) = ML_NPE( x, y, L.A.NPE, L.B.NPE, L.C.NPE );
+            ME2D.Grid.NPE(j,i) = ML_NPE( i, j, L.A.NPE, L.B.NPE, L.C.NPE );
         end
     end
     

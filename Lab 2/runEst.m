@@ -13,14 +13,15 @@ function [ ME1D, ME2D ] = runEst( ME1D, ME2D )
     ME1D.B.PE_U = PE_Uniform( ME1D.B.samples );
     
     %% ME2D   
-    X = ME1D.X;
+    X = ME2D.X;
+    Y = ME2D.Y;
     
     ME2D.L.A.PE = PE_Gaussian( ME2D.L.A.samples );
     ME2D.L.B.PE = PE_Gaussian( ME2D.L.B.samples );
     ME2D.L.C.PE = PE_Gaussian( ME2D.L.C.samples );
     
-    ME2D.L.A.NPE = Non_Parametric_Estimator( X, ME2D.L.A.samples );
-    ME2D.L.B.NPE = Non_Parametric_Estimator( X, ME2D.L.B.samples );
-    ME2D.L.C.NPE = Non_Parametric_Estimator( X, ME2D.L.C.samples );
+    ME2D.L.A.NPE = Non_Parametric_Estimator( X, Y, ME2D.L.A.samples );
+    ME2D.L.B.NPE = Non_Parametric_Estimator( X, Y, ME2D.L.B.samples );
+    ME2D.L.C.NPE = Non_Parametric_Estimator( X, Y, ME2D.L.C.samples );
 
 end
