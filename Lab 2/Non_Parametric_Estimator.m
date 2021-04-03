@@ -15,6 +15,6 @@ function pdf = Non_Parametric_Estimator( X, samples, std )
     
     %% ME2D
     else
-        [ pdf.p, pdf.x, pdf.y] = parzen( samples, 1, 400 ); % change res to whatever
+        [ pdf.p, pdf.x, pdf.y] = parzen( samples, 1, sqrt(400) ); % change res to whatever
     end
 end
