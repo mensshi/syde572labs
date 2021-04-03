@@ -13,7 +13,7 @@ function plotData( ME1D, ME2D )
     plot( X, Grid_A.PE_U )
     plot( X, Grid_A.NPE1 )
     plot( X, Grid_A.NPE2 )
-    legend( 'True', 'PE - Gaussian', 'PE - Exponential', 'PE - Uniform', 'NPE - Parzan 0.1', 'NPE - Parzen 0.4' );
+    legend( 'True', 'PE - Gaussian', 'PE - Exponential', 'PE - Uniform', 'NPE - Parzen 0.1', 'NPE - Parzen 0.4' );
     
     subplot( ME1D.sub2 );
     area( X, Grid_B.true, 'FaceColor', 'k' );
@@ -23,7 +23,7 @@ function plotData( ME1D, ME2D )
     plot( X, Grid_B.PE_U )
     plot( X, Grid_B.NPE1 )
     plot( X, Grid_B.NPE2 )
-    legend( 'True', 'PE - Gaussian', 'PE - Exponential', 'PE - Uniform', 'NPE - Parzan 0.1', 'NPE - Parzen 0.4' );
+    legend( 'True', 'PE - Gaussian', 'PE - Exponential', 'PE - Uniform', 'NPE - Parzen 0.1', 'NPE - Parzen 0.4' );
     
     %% Model Estimation 2D
     X = ME2D.X;
@@ -37,5 +37,5 @@ function plotData( ME1D, ME2D )
     plot( L.A.PE.stdContour.X, L.A.PE.stdContour.Y, 'b', 'MarkerSize', 3 )
     plot( L.B.PE.stdContour.X, L.B.PE.stdContour.Y, 'r', 'MarkerSize', 3 )
     plot( L.C.PE.stdContour.X, L.C.PE.stdContour.Y, 'g', 'MarkerSize', 3 )
-    legend( 'A', 'B', 'C', 'PE - Gaussian', 'NPE - Parzan');
+    legend( 'A', 'B', 'C', 'PE - Gaussian', 'NPE - Parzen');
 end
